@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 interface OnboardingData {
@@ -138,16 +139,48 @@ export default function OnboardingForm({ onComplete }: OnboardingFormProps) {
               <h3 className="text-lg font-semibold">
                 ¿Qué ingredientes tienes disponibles en casa?
               </h3>
+              
+              {/* Start from scratch option */}
+              <div className="flex items-center space-x-2 p-4 border rounded-lg bg-muted/50">
+                <Checkbox
+                  id="startFromScratch"
+                  checked={ingredients === "EMPEZAR_DE_CERO"}
+                  onCheckedChange={(checked) => 
+                    setIngredients(checked ? "EMPEZAR_DE_CERO" : "")
+                  }
+                />
+                <div className="flex-1">
+                  <Label htmlFor="startFromScratch" className="font-medium cursor-pointer">
+                    🛒 Empezar de cero
+                  </Label>
+                  <p className="text-sm text-muted-foreground">
+                    No tengo ingredientes, voy a comprar todo lo necesario
+                  </p>
+                </div>
+              </div>
+
+              {ingredients !== "EMPEZAR_DE_CERO" && (
+                <>
+                  <p className="text-sm text-muted-foreground">
+                    Lista los ingredientes que ya tienes, separados por comas. 
+                    Esto nos ayudará a sugerir recetas que puedas hacer ahora.
+                  </p>
+                  <Textarea
+                    placeholder="Ej: pollo, arroz, brócoli, huevos, avena, plátanos..."
+                    value={ingredients === "EMPEZAR_DE_CERO" ? "" : ingredients}
+                    onChange={(e) => setIngredients(e.target.value)}
+                    rows={4}
+                  />
+                </>
+              )}
+              
               <p className="text-sm text-muted-foreground">
-                Lista los ingredientes que ya tienes, separados por comas. 
-                Esto nos ayudará a sugerir recetas que puedas hacer ahora.
+                {ingredients === "EMPEZAR_DE_CERO" 
+                  ? "Generaremos un menú completo y una lista de compras con todo lo necesario."
+                  : "Esto nos ayudará a sugerir recetas que puedas preparar inmediatamente."
+                }
               </p>
-              <Textarea
-                placeholder="Ej: pollo, arroz, brócoli, huevos, avena, plátanos..."
-                value={ingredients}
-                onChange={(e) => setIngredients(e.target.value)}
-                rows={4}
-              />
+
               <div className="flex gap-4">
                 <Button 
                   onClick={() => setStep(2)} 

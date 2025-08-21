@@ -16,6 +16,7 @@ export interface Meal {
     fat: number;
   };
   prepTime: number;
+  image?: string;
 }
 
 export interface DayMenu {
@@ -25,8 +26,12 @@ export interface DayMenu {
   dinner: Meal;
 }
 
-// Datos de ejemplo para el MVP
-const sampleWeeklyMenu: DayMenu[] = [
+import avenaFrutasImg from "@/assets/meals/avena-frutas.jpg";
+import ensaladaPolloImg from "@/assets/meals/ensalada-pollo-quinoa.jpg";
+import salmonVegetalesImg from "@/assets/meals/salmon-vegetales.jpg";
+
+// Datos de ejemplo para el MVP - 7 días completos
+export const sampleWeeklyMenu: DayMenu[] = [
   {
     day: "Lunes",
     breakfast: {
@@ -35,7 +40,8 @@ const sampleWeeklyMenu: DayMenu[] = [
       ingredients: ["Avena (50g)", "Plátano (1 mediano)", "Proteína en polvo (1 scoop)", "Nueces (10g)", "Canela"],
       steps: ["Cocinar avena con agua", "Agregar proteína en polvo", "Decorar con plátano y nueces", "Espolvorear canela"],
       nutrition: { calories: 420, protein: 28, carbs: 45, fat: 12 },
-      prepTime: 10
+      prepTime: 10,
+      image: avenaFrutasImg
     },
     lunch: {
       id: "l1", 
@@ -43,7 +49,8 @@ const sampleWeeklyMenu: DayMenu[] = [
       ingredients: ["Pechuga de pollo (150g)", "Quinoa (80g)", "Espinacas (100g)", "Tomate cherry (100g)", "Aguacate (1/2)", "Aceite de oliva (1 cda)"],
       steps: ["Cocinar quinoa", "Asar pollo a la plancha", "Mezclar vegetales", "Servir con aderezo de aceite de oliva"],
       nutrition: { calories: 520, protein: 42, carbs: 35, fat: 18 },
-      prepTime: 20
+      prepTime: 20,
+      image: ensaladaPolloImg
     },
     dinner: {
       id: "d1",
@@ -51,25 +58,207 @@ const sampleWeeklyMenu: DayMenu[] = [
       ingredients: ["Salmón (120g)", "Brócoli (150g)", "Calabacín (100g)", "Zanahoria (80g)", "Limón", "Hierbas finas"],
       steps: ["Cocinar salmón al horno", "Vapor los vegetales", "Sazonar con limón y hierbas", "Servir caliente"],
       nutrition: { calories: 380, protein: 35, carbs: 15, fat: 20 },
-      prepTime: 25
+      prepTime: 25,
+      image: salmonVegetalesImg
     }
   },
-  // Agregar más días para completar la semana...
+  {
+    day: "Martes",
+    breakfast: {
+      id: "b2",
+      name: "Tortilla de Claras con Vegetales",
+      ingredients: ["Claras de huevo (4)", "Espinacas (50g)", "Tomate (1)", "Champiñones (50g)", "Aceite en spray"],
+      steps: ["Saltear vegetales", "Batir claras", "Cocinar tortilla", "Servir caliente"],
+      nutrition: { calories: 180, protein: 20, carbs: 8, fat: 5 },
+      prepTime: 12,
+      image: avenaFrutasImg
+    },
+    lunch: {
+      id: "l2",
+      name: "Bowl de Atún y Aguacate",
+      ingredients: ["Atún en agua (150g)", "Aguacate (1)", "Lechuga (100g)", "Pepino (1)", "Limón", "Aceite de oliva (1 cdta)"],
+      steps: ["Preparar base de lechuga", "Agregar atún escurrido", "Cortar aguacate y pepino", "Aliñar con limón y aceite"],
+      nutrition: { calories: 450, protein: 35, carbs: 12, fat: 28 },
+      prepTime: 10,
+      image: ensaladaPolloImg
+    },
+    dinner: {
+      id: "d2",
+      name: "Pechuga a la Plancha con Batata",
+      ingredients: ["Pechuga de pollo (150g)", "Batata (200g)", "Espárragos (150g)", "Ajo", "Hierbas aromáticas"],
+      steps: ["Hornear batata", "Cocinar pechuga a la plancha", "Saltear espárragos", "Sazonar y servir"],
+      nutrition: { calories: 420, protein: 38, carbs: 30, fat: 8 },
+      prepTime: 30,
+      image: salmonVegetalesImg
+    }
+  },
+  {
+    day: "Miércoles",
+    breakfast: {
+      id: "b3",
+      name: "Smoothie Verde Proteico",
+      ingredients: ["Espinacas (50g)", "Plátano (1)", "Proteína vegetal (1 scoop)", "Leche de almendras (200ml)", "Chía (1 cda)"],
+      steps: ["Licuar todos los ingredientes", "Servir inmediatamente", "Decorar con semillas de chía"],
+      nutrition: { calories: 350, protein: 25, carbs: 35, fat: 8 },
+      prepTime: 5,
+      image: avenaFrutasImg
+    },
+    lunch: {
+      id: "l3",
+      name: "Curry de Garbanzos",
+      ingredients: ["Garbanzos cocidos (200g)", "Leche de coco (100ml)", "Tomate (2)", "Cebolla (1)", "Curry en polvo", "Espinacas"],
+      steps: ["Sofreír cebolla", "Agregar tomate y especias", "Incorporar garbanzos", "Finalizar con espinacas"],
+      nutrition: { calories: 380, protein: 18, carbs: 45, fat: 12 },
+      prepTime: 25,
+      image: ensaladaPolloImg
+    },
+    dinner: {
+      id: "d3",
+      name: "Merluza al Horno con Verduras",
+      ingredients: ["Merluza (150g)", "Calabacín (1)", "Berenjena (1/2)", "Pimiento (1)", "Aceite de oliva", "Limón"],
+      steps: ["Cortar verduras en bastones", "Condimentar pescado", "Hornear todo junto", "Servir con limón"],
+      nutrition: { calories: 320, protein: 32, carbs: 15, fat: 12 },
+      prepTime: 35,
+      image: salmonVegetalesImg
+    }
+  },
+  // ... continuar con Jueves, Viernes, Sábado, Domingo usando las mismas recetas rotadas
+  {
+    day: "Jueves",
+    breakfast: {
+      id: "b4",
+      name: "Avena con Frutas y Proteína",
+      ingredients: ["Avena (50g)", "Plátano (1 mediano)", "Proteína en polvo (1 scoop)", "Nueces (10g)", "Canela"],
+      steps: ["Cocinar avena con agua", "Agregar proteína en polvo", "Decorar con plátano y nueces", "Espolvorear canela"],
+      nutrition: { calories: 420, protein: 28, carbs: 45, fat: 12 },
+      prepTime: 10,
+      image: avenaFrutasImg
+    },
+    lunch: {
+      id: "l4",
+      name: "Ensalada de Pollo y Quinoa",
+      ingredients: ["Pechuga de pollo (150g)", "Quinoa (80g)", "Espinacas (100g)", "Tomate cherry (100g)", "Aguacate (1/2)", "Aceite de oliva (1 cda)"],
+      steps: ["Cocinar quinoa", "Asar pollo a la plancha", "Mezclar vegetales", "Servir con aderezo de aceite de oliva"],
+      nutrition: { calories: 520, protein: 42, carbs: 35, fat: 18 },
+      prepTime: 20,
+      image: ensaladaPolloImg
+    },
+    dinner: {
+      id: "d4",
+      name: "Salmón con Vegetales al Vapor",
+      ingredients: ["Salmón (120g)", "Brócoli (150g)", "Calabacín (100g)", "Zanahoria (80g)", "Limón", "Hierbas finas"],
+      steps: ["Cocinar salmón al horno", "Vapor los vegetales", "Sazonar con limón y hierbas", "Servir caliente"],
+      nutrition: { calories: 380, protein: 35, carbs: 15, fat: 20 },
+      prepTime: 25,
+      image: salmonVegetalesImg
+    }
+  },
+  {
+    day: "Viernes",
+    breakfast: {
+      id: "b5",
+      name: "Tortilla de Claras con Vegetales",
+      ingredients: ["Claras de huevo (4)", "Espinacas (50g)", "Tomate (1)", "Champiñones (50g)", "Aceite en spray"],
+      steps: ["Saltear vegetales", "Batir claras", "Cocinar tortilla", "Servir caliente"],
+      nutrition: { calories: 180, protein: 20, carbs: 8, fat: 5 },
+      prepTime: 12,
+      image: avenaFrutasImg
+    },
+    lunch: {
+      id: "l5",
+      name: "Bowl de Atún y Aguacate",
+      ingredients: ["Atún en agua (150g)", "Aguacate (1)", "Lechuga (100g)", "Pepino (1)", "Limón", "Aceite de oliva (1 cdta)"],
+      steps: ["Preparar base de lechuga", "Agregar atún escurrido", "Cortar aguacate y pepino", "Aliñar con limón y aceite"],
+      nutrition: { calories: 450, protein: 35, carbs: 12, fat: 28 },
+      prepTime: 10,
+      image: ensaladaPolloImg
+    },
+    dinner: {
+      id: "d5",
+      name: "Pechuga a la Plancha con Batata",
+      ingredients: ["Pechuga de pollo (150g)", "Batata (200g)", "Espárragos (150g)", "Ajo", "Hierbas aromáticas"],
+      steps: ["Hornear batata", "Cocinar pechuga a la plancha", "Saltear espárragos", "Sazonar y servir"],
+      nutrition: { calories: 420, protein: 38, carbs: 30, fat: 8 },
+      prepTime: 30,
+      image: salmonVegetalesImg
+    }
+  },
+  {
+    day: "Sábado",
+    breakfast: {
+      id: "b6",
+      name: "Smoothie Verde Proteico",
+      ingredients: ["Espinacas (50g)", "Plátano (1)", "Proteína vegetal (1 scoop)", "Leche de almendras (200ml)", "Chía (1 cda)"],
+      steps: ["Licuar todos los ingredientes", "Servir inmediatamente", "Decorar con semillas de chía"],
+      nutrition: { calories: 350, protein: 25, carbs: 35, fat: 8 },
+      prepTime: 5,
+      image: avenaFrutasImg
+    },
+    lunch: {
+      id: "l6",
+      name: "Curry de Garbanzos",
+      ingredients: ["Garbanzos cocidos (200g)", "Leche de coco (100ml)", "Tomate (2)", "Cebolla (1)", "Curry en polvo", "Espinacas"],
+      steps: ["Sofreír cebolla", "Agregar tomate y especias", "Incorporar garbanzos", "Finalizar con espinacas"],
+      nutrition: { calories: 380, protein: 18, carbs: 45, fat: 12 },
+      prepTime: 25,
+      image: ensaladaPolloImg
+    },
+    dinner: {
+      id: "d6",
+      name: "Merluza al Horno con Verduras",
+      ingredients: ["Merluza (150g)", "Calabacín (1)", "Berenjena (1/2)", "Pimiento (1)", "Aceite de oliva", "Limón"],
+      steps: ["Cortar verduras en bastones", "Condimentar pescado", "Hornear todo junto", "Servir con limón"],
+      nutrition: { calories: 320, protein: 32, carbs: 15, fat: 12 },
+      prepTime: 35,
+      image: salmonVegetalesImg
+    }
+  },
+  {
+    day: "Domingo",
+    breakfast: {
+      id: "b7",
+      name: "Avena con Frutas y Proteína",
+      ingredients: ["Avena (50g)", "Plátano (1 mediano)", "Proteína en polvo (1 scoop)", "Nueces (10g)", "Canela"],
+      steps: ["Cocinar avena con agua", "Agregar proteína en polvo", "Decorar con plátano y nueces", "Espolvorear canela"],
+      nutrition: { calories: 420, protein: 28, carbs: 45, fat: 12 },
+      prepTime: 10,
+      image: avenaFrutasImg
+    },
+    lunch: {
+      id: "l7",
+      name: "Ensalada de Pollo y Quinoa",
+      ingredients: ["Pechuga de pollo (150g)", "Quinoa (80g)", "Espinacas (100g)", "Tomate cherry (100g)", "Aguacate (1/2)", "Aceite de oliva (1 cda)"],
+      steps: ["Cocinar quinoa", "Asar pollo a la plancha", "Mezclar vegetales", "Servir con aderezo de aceite de oliva"],
+      nutrition: { calories: 520, protein: 42, carbs: 35, fat: 18 },
+      prepTime: 20,
+      image: ensaladaPolloImg
+    },
+    dinner: {
+      id: "d7",
+      name: "Salmón con Vegetales al Vapor",
+      ingredients: ["Salmón (120g)", "Brócoli (150g)", "Calabacín (100g)", "Zanahoria (80g)", "Limón", "Hierbas finas"],
+      steps: ["Cocinar salmón al horno", "Vapor los vegetales", "Sazonar con limón y hierbas", "Servir caliente"],
+      nutrition: { calories: 380, protein: 35, carbs: 15, fat: 20 },
+      prepTime: 25,
+      image: salmonVegetalesImg
+    }
+  }
 ];
 
 interface WeeklyMenuProps {
   userPreferences: any;
   onGenerateShoppingList: () => void;
+  onViewPlanner: () => void;
 }
 
-export default function WeeklyMenu({ userPreferences, onGenerateShoppingList }: WeeklyMenuProps) {
+export default function WeeklyMenu({ userPreferences, onGenerateShoppingList, onViewPlanner }: WeeklyMenuProps) {
   const [selectedMeal, setSelectedMeal] = useState<Meal | null>(null);
   const [currentDay, setCurrentDay] = useState(0);
 
   const weekDays = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
 
-  // Para el MVP, mostraremos solo un día de ejemplo
-  const dayMenu = sampleWeeklyMenu[0];
+  // Para el MVP, mostraremos el día seleccionado
+  const dayMenu = sampleWeeklyMenu[currentDay];
 
   const getMealTypeIcon = (type: string) => {
     switch (type) {
@@ -95,6 +284,15 @@ export default function WeeklyMenu({ userPreferences, onGenerateShoppingList }: 
         </div>
       </CardHeader>
       <CardContent>
+        {meal.image && (
+          <div className="aspect-video mb-3 rounded-lg overflow-hidden">
+            <img 
+              src={meal.image} 
+              alt={meal.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
         <h4 className="font-semibold mb-2">{meal.name}</h4>
         <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground mb-3">
           <span>🔥 {meal.nutrition.calories} cal</span>
@@ -174,14 +372,14 @@ export default function WeeklyMenu({ userPreferences, onGenerateShoppingList }: 
 
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="hero" size="lg" onClick={onGenerateShoppingList}>
+          <Button variant="hero" size="lg" onClick={onViewPlanner}>
+            📅 Ver Planificador Semanal
+          </Button>
+          <Button variant="outline" size="lg" onClick={onGenerateShoppingList}>
             📝 Generar Lista de Compras
           </Button>
-          <Button variant="outline" size="lg">
-            🔄 Regenerar Menú
-          </Button>
           <Button variant="secondary" size="lg">
-            💾 Guardar Menú
+            🔄 Regenerar Menú
           </Button>
         </div>
       </div>
