@@ -1,12 +1,61 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import Hero from "@/components/Hero";
+import OnboardingForm from "@/components/OnboardingForm";
+import WeeklyMenu from "@/components/WeeklyMenu";
+import ShoppingList from "@/components/ShoppingList";
+
+type AppState = "landing" | "onboarding" | "menu" | "shopping";
+
+interface UserPreferences {
+  goal: string;
+  dietaryPreferences: string[];
+  ingredients: string;
+}
 
 const Index = () => {
+  const [currentState, setCurrentState] = useState<AppState>("landing");
+  const [userPreferences, setUserPreferences] = useState<UserPreferences | null>(null);
+
+  const handleOnboardingComplete = (data: UserPreferences) => {
+    setUserPreferences(data);
+    setCurrentState("menu");
+  };
+
+  const handleGenerateShoppingList = () => {
+    setCurrentState("shopping");
+  };
+
+  const handleBackToMenu = () => {
+    setCurrentState("menu");
+  };
+
+  // Simular click en "Crear Mi Menú Gratis" desde el Hero
+  const startOnboarding = () => {
+    setCurrentState("onboarding");
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen">
+      {currentState === "landing" && (
+        <div onClick={startOnboarding}>
+          <Hero />
+        </div>
+      )}
+      
+      {currentState === "onboarding" && (
+        <OnboardingForm onComplete={handleOnboardingComplete} />
+      )}
+      
+      {currentState === "menu" && userPreferences && (
+        <WeeklyMenu 
+          userPreferences={userPreferences}
+          onGenerateShoppingList={handleGenerateShoppingList}
+        />
+      )}
+      
+      {currentState === "shopping" && (
+        <ShoppingList onBack={handleBackToMenu} />
+      )}
     </div>
   );
 };
